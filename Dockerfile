@@ -1,20 +1,20 @@
 # Use the official Node.js image
-FROM node:18
+FROM node:14
 
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json files
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of your application code
 COPY . .
 
-# Expose port 5000
-EXPOSE 5000
+# Expose the port your app runs on
+EXPOSE 3000
 
-# Start the application
+# Command to run your app
 CMD ["node", "index.js"]
