@@ -1,28 +1,22 @@
 version: '3.8'
-
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "5000:5000"  # Expose the Node.js app on port 5000
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/egypt_community
-      - JWT_SECRET=Kams@102
+      - "3000:3000" # Adjust the port as necessary
     depends_on:
       - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+      - DB_NAME=mydatabase
 
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Kams@102
-      POSTGRES_DB: egypt_community
-    volumes:
-      - db-data:/var/lib/postgresql/data
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
     ports:
-      - "5432:5432"  # Expose PostgreSQL on port 5432 for external access
-
-volumes:
-  db-data:
+      - "5432:5432"
